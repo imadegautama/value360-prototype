@@ -310,7 +310,12 @@ function Header({ active, period, onPeriodChange, live, onLiveToggle }) {
   const current = nav.find((item) => item.id === active);
   return (
     <header className="topbar">
-      <h1>{current.label}</h1>
+      <div className="topbar-left">
+        <span className="topbar-brand">
+          <Icon name="leaf" size={16} />
+        </span>
+        <h1>{current.label}</h1>
+      </div>
       <div className="top-actions">
         <LiveToggle live={live} onToggle={onLiveToggle} />
         <Dropdown
@@ -688,32 +693,34 @@ function PortfolioTableCI() {
           <Icon name="info" size={14} />
         </div>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Nama Proyek</th>
-            <th>tCO2e Avoided</th>
-            <th>Payback (tahun)</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r) => (
-            <tr key={r.name}>
-              <td>
-                <b>{r.name}</b>
-              </td>
-              <td>{r.avoided}</td>
-              <td>{r.payback}</td>
-              <td>
-                <span className={`status-pill ${r.status === "Approved" ? "approved" : "review"}`}>
-                  {r.status}
-                </span>
-              </td>
+      <div className="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Nama Proyek</th>
+              <th>tCO2e Avoided</th>
+              <th>Payback (tahun)</th>
+              <th>Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.name}>
+                <td>
+                  <b>{r.name}</b>
+                </td>
+                <td>{r.avoided}</td>
+                <td>{r.payback}</td>
+                <td>
+                  <span className={`status-pill ${r.status === "Approved" ? "approved" : "review"}`}>
+                    {r.status}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <button className="table-more-link">
         <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <Icon name="leaf" size={14} /> Lihat semua proyek dekarbonisasi
@@ -959,6 +966,7 @@ function CohortTable() {
         Status Kohort Berjalan
         <Icon name="info" size={14} />
       </div>
+      <div className="table-scroll">
       <table>
         <thead>
           <tr>
@@ -1008,6 +1016,7 @@ function CohortTable() {
           ))}
         </tbody>
       </table>
+      </div>
     </section>
   );
 }
@@ -1195,6 +1204,7 @@ function OperatingModelTable() {
           <span>Informed</span>
         </div>
       </div>
+      <div className="table-scroll">
       <table>
         <thead>
           <tr>
@@ -1221,6 +1231,7 @@ function OperatingModelTable() {
           ))}
         </tbody>
       </table>
+      </div>
     </section>
   );
 }
